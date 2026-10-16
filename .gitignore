@@ -6,3 +6,4 @@ data/
 *.db-shm
 .DS_Store
 dist-demo/
+web/dist/
