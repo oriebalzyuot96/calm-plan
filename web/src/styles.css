@@ -143,7 +143,10 @@ p {
   gap: 0.35rem;
 }
 
-.cp-demo {
+.cp-demo.pl-message {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
   margin-block-start: 0.5rem;
 }
 
@@ -895,4 +898,20 @@ p {
 :root[data-a11y-motion='reduce'] .cp-pg,
 :root[data-a11y-motion='off'] .cp-pg {
   transition: none;
+}
+
+.cp-msg__avatar {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--pl-primary-soft);
+  color: var(--pl-primary-ink);
+}
+
+/* The date picker opens a popover inside the card; let it escape the card's rounded clip. */
+.cp-add-card.pl-card {
+  overflow: visible;
 }

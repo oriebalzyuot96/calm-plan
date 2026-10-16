@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { Badge, Button, Card, Checkbox, EmptyState, Input, ProgressBar, SkeletonText, toast, useSound } from 'pelagic/react';
+import { Badge, Button, Card, Checkbox, DatePicker, EmptyState, formatIsoDate, parseIsoDate, Input, ProgressBar, SkeletonText, toast, useSound } from 'pelagic/react';
 import { ArrowDownIcon, ArrowUpIcon, CalendarIcon, PlusIcon, TrashIcon } from 'pelagic/icons/react';
 import { Illustration } from 'pelagic/illustrations/react';
 import { api, errorKey, type Task } from '../api';
@@ -181,7 +181,25 @@ export function Today() {
               }}
             />
             <div className="cp-add__row">
-              <Input type="date" label={t('dueLabel')} value={due} onChange={(e) => setDue(e.target.value)} />
+              <DatePicker
+                label={t('dueLabel')}
+                value={due ? parseIsoDate(due) : null}
+                onChange={(v) => setDue(v instanceof Date ? formatIsoDate(v) : '')}
+                locale={locale}
+                showButtonBar
+                placeholder="2026-10-16"
+                labels={{
+                  chooseDate: t('dpChoose'),
+                  previousMonth: t('dpPrev'),
+                  nextMonth: t('dpNext'),
+                  month: t('dpMonth'),
+                  year: t('dpYear'),
+                  today: t('dpToday'),
+                  clear: t('dpClear'),
+                  done: t('dpDone'),
+                  format: t('dpFormat'),
+                }}
+              />
               <Checkbox label={t('habitToggle')} checked={habit} onChange={(e) => setHabit(e.target.checked)} />
             </div>
             <Button type="submit" variant="primary" loading={busy}>

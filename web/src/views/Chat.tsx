@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { Avatar, Button, Card, Textarea, useSound } from 'pelagic/react';
-import { SendIcon, SparklesIcon } from 'pelagic/icons/react';
+import { Button, Card, Textarea, useSound } from 'pelagic/react';
+import { LeafIcon, SendIcon, SparklesIcon } from 'pelagic/icons/react';
 import { api, errorKey } from '../api';
 import { useApp, type Bubble } from '../context';
 import { useI18n } from '../i18n';
@@ -82,7 +82,11 @@ export function Chat() {
         <div ref={logRef} className="cp-chat__log" role="log" aria-live="polite" aria-label={t('chatLog')} aria-busy={busy} tabIndex={0}>
           {bubbles.map((b) => (
             <div key={b.id} className={`cp-msg cp-msg--${b.role}${b.crisis ? ' cp-msg--crisis' : ''}`}>
-              {b.role === 'assistant' && <Avatar name={t('chatCompanion')} size="sm" />}
+              {b.role === 'assistant' && (
+                <span className="cp-msg__avatar" aria-hidden="true">
+                  <LeafIcon size={16} />
+                </span>
+              )}
               <div className="cp-msg__bubble">
                 <span className="pl-sr-only">{b.role === 'user' ? t('chatYou') : t('chatCompanion')}: </span>
                 <p className="cp-msg__text">{b.text}</p>
