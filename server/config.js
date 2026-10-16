@@ -1,7 +1,17 @@
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+/**
+ * Folder with the front end. The React build in web/dist is used when it exists
+ * (npm run build); otherwise the server falls back to the vanilla front end in public/.
+ */
+export function resolvePublicDir(root = ROOT, exists = existsSync) {
+  const built = path.join(root, 'web', 'dist');
+  return exists(path.join(built, 'index.html')) ? built : path.join(root, 'public');
+}
 
 /**
  * Reads runtime configuration from environment variables.
@@ -11,7 +21,7 @@ export function loadConfig(env = process.env) {
   const port = Number.parseInt(env.PORT ?? '', 10);
   return {
     root: ROOT,
-    publicDir: path.join(ROOT, 'public'),
+    publicDir: resolvePublicDir(),
     port: Number.isInteger(port) && port >= 0 ? port : 3000,
     dataFile: env.DATA_FILE || path.join(ROOT, 'data', 'calm-plan.db'),
     anthropicApiKey: env.ANTHROPIC_API_KEY || '',

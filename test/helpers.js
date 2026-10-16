@@ -1,4 +1,10 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createServer } from '../server/app.js';
+
+// The server prefers the React build (web/dist) when it exists. The static-file tests here check the
+// vanilla front end in public/, so they pin it; test/static.test.js covers the choice itself.
+const PUBLIC = path.join(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), 'public');
 
 /**
  * Starts the app on a random free port with an in-memory database.
@@ -7,6 +13,7 @@ import { createServer } from '../server/app.js';
 export async function startTestServer(overrides = {}) {
   const server = createServer({
     dataFile: ':memory:',
+    publicDir: PUBLIC,
     anthropicApiKey: '',
     rateLimitMax: 10_000,
     ...overrides,

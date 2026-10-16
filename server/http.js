@@ -123,6 +123,8 @@ const TYPES = {
   '.ico': 'image/x-icon',
   '.webmanifest': 'application/manifest+json',
   '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.txt': 'text/plain; charset=utf-8',
 };
 
 export async function serveStatic(req, res, pathname, publicDir, headers) {
