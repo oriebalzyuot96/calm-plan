@@ -81,13 +81,23 @@ Limits: request bodies are capped at 8 KB, chat messages at 1000 characters, and
 
 ## Crisis resources (owner to localise)
 
-The crisis guidance in `server/chat/crisis.js` gives generic instructions and names example emergency numbers (911, 999, 112). **Before you use this with anyone, replace these with the correct resources for your country:**
+The crisis guidance in `public/js/shared/crisis.js` gives generic instructions and names example emergency numbers (911, 999, 112). **Before you use this with anyone, replace these with the correct resources for your country:**
 
 - The emergency number for your country.
 - A local mental-health helpline, with its number and hours.
 - Any local services you trust.
 
-Keyword lists are in `server/chat/crisis.js`. They are deliberately broad, so the app may show resources more often than needed. Review the Arabic wording with a native speaker.
+Keyword lists are in `public/js/shared/crisis.js`. They are deliberately broad, so the app may show resources more often than needed. Review the Arabic wording with a native speaker.
+
+## Static demo (GitHub Pages)
+
+`npm run build:demo` writes a static copy of the front end to `dist-demo/` (ignored by git). It runs without the server:
+
+- Tasks and moods live in memory in the browser tab (`public/js/demo-store.js`) and are cleared when the tab is closed. Nothing is written to `localStorage` except the appearance preferences.
+- Chat uses the same rule-based responder and crisis detection as the server (`public/js/shared/`, imported by both). No API key and no network calls.
+- Paths are relative, so the folder works under any sub-path, for example `/samples/calm-plan/`. The CSP is set with a meta tag and there are no inline scripts.
+
+Demo mode turns on with `?demo=1`, with `<meta name="calm-plan-mode" content="demo">` (added by the build), or when `GET /health` fails. A banner says so in Arabic and English.
 
 ## Deploy on Render
 
@@ -97,7 +107,9 @@ Keyword lists are in `server/chat/crisis.js`. They are deliberately broad, so th
 
 ```
 server/        node:http server, SQLite store (node:sqlite), validation, chat logic
-server/chat/   crisis detection, local responder, Anthropic client
+server/chat/   chat entry point and Anthropic client (re-exports the shared modules)
+public/js/shared/  crisis detection and local responder, shared by server and demo
+scripts/       build-demo.mjs (static demo build)
 public/        static front end (HTML, CSS, ES modules, no build step)
 test/          node:test suites
 render.yaml    Render blueprint

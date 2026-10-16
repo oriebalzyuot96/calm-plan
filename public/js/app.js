@@ -10,6 +10,7 @@ import { initMood } from './views/mood.js';
 import { initChat } from './views/chat.js';
 import { initMeditate } from './views/meditate.js';
 import { initSettings } from './views/settings.js';
+import { isDemoMode } from './api.js';
 
 const VIEWS = ['today', 'mood', 'meditate', 'chat', 'settings'];
 
@@ -53,6 +54,15 @@ function boot() {
   initDrawer();
 
   document.getElementById('crisis').querySelector('[data-crisis-dismiss]').addEventListener('click', hideCrisis);
+
+  isDemoMode().then((demo) => {
+    const banner = document.getElementById('demo-banner');
+    if (banner) banner.hidden = !demo;
+    if (!demo) return;
+    document.documentElement.dataset.mode = 'demo';
+    for (const node of document.querySelectorAll('[data-i18n="privacyText"]')) node.dataset.i18n = 'privacyTextDemo';
+    applyI18n(document);
+  });
 
   window.addEventListener('hashchange', () => route(true));
   route(false);

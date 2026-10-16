@@ -218,6 +218,15 @@ svg { flex: none; }
 }
 .safety-chip svg { width: 16px; height: 16px; color: var(--accent); }
 
+/* Shown only in the static demo (no server). */
+.demo-banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.15rem 0.9rem;
+  width: fit-content; max-width: min(860px, calc(100% - 32px)); margin: 0 auto 8px; padding: 6px 14px; text-align: center;
+  font-size: 0.82rem; color: var(--text); background: var(--surface);
+  border: 1px dashed var(--accent); border-radius: 14px; line-height: 1.45;
+}
+.demo-banner[hidden] { display: none; }
+
 /* ---- Hero scene ---- */
 .hero { max-width: 860px; margin: 12px auto 0; padding: 0 16px; }
 .hero-scene { display: block; width: 100%; height: clamp(110px, 24vw, 190px); border-radius: var(--radius); }

@@ -81,6 +81,8 @@ export const STRINGS = {
     privacyTitle: 'Your data',
     privacyText:
       'Your tasks and mood check-ins are stored on this server, in a local database. Chat messages are not saved. The owner decides where the server runs.',
+    privacyTextDemo:
+      'This is a demo. Your tasks and mood check-ins stay in this browser tab only and are cleared when you close it. Nothing is sent to a server.',
     eraseButton: 'Erase all my data',
     eraseTitle: 'Erase all data?',
     eraseText: 'This permanently deletes all your tasks and mood check-ins. This cannot be undone.',
@@ -178,6 +180,8 @@ export const STRINGS = {
     privacyTitle: 'بياناتك',
     privacyText:
       'تُحفظ مهامك وتسجيلات مزاجك على هذا الخادم في قاعدة بيانات محلية. لا تُحفظ رسائل الدردشة. صاحب التطبيق هو من يحدد مكان تشغيل الخادم.',
+    privacyTextDemo:
+      'هذا عرض تجريبي. تبقى مهامك وتسجيلات مزاجك في تبويب المتصفح هذا فقط وتُمسح عند إغلاقه. لا يُرسل شيء إلى أي خادم.',
     eraseButton: 'مسح كل بياناتي',
     eraseTitle: 'هل تريد مسح كل البيانات؟',
     eraseText: 'سيتم حذف كل مهامك وتسجيلات مزاجك نهائيًا. لا يمكن التراجع عن ذلك.',

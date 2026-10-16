@@ -1,5 +1,5 @@
-import { crisisGuidance, detectCrisis } from './crisis.js';
-import { isMedicalTopic, respondLocally } from './responder.js';
+import { isMedicalTopic } from './responder.js';
+import { crisisReply, localReply } from '../../public/js/shared/reply.js';
 
 export const SYSTEM_PROMPT = `You are a gentle, supportive self-help companion inside a personal wellbeing app called Calm Plan.
 
@@ -20,15 +20,8 @@ Rules you must always follow:
 export async function respondToChat({ messages, lang, apiKey, model, fetchImpl, getContext }) {
   const latest = messages[messages.length - 1].content;
 
-  if (detectCrisis(latest)) {
-    const g = crisisGuidance(lang);
-    return {
-      reply: `${g.title}\n${g.body}`,
-      kind: 'crisis',
-      source: 'safety',
-      crisis: g,
-    };
-  }
+  const crisis = crisisReply(latest, lang);
+  if (crisis) return crisis;
 
   if (apiKey && !isMedicalTopic(latest)) {
     try {
@@ -41,8 +34,7 @@ export async function respondToChat({ messages, lang, apiKey, model, fetchImpl, 
   }
 
   const ctx = getContext ? getContext() : { moods: [], openTasks: [] };
-  const local = respondLocally({ message: latest, lang, moods: ctx.moods, openTasks: ctx.openTasks });
-  return { reply: local.text, kind: local.kind, source: 'local', crisis: null };
+  return localReply(latest, lang, ctx);
 }
 
 export async function callAnthropic({ apiKey, model, lang, messages, fetchImpl = globalThis.fetch }) {
