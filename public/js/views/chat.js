@@ -122,5 +122,6 @@ export function initChat() {
   document.addEventListener('langchange', () => {
     logEl.setAttribute('aria-label', t('chatLog'));
     renderChips();
+    if (history.length === 0 && logEl.children.length <= 1) renderWelcome();
   });
 }
