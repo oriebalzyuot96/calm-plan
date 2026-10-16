@@ -1,4 +1,6 @@
-const STRINGS = {
+import { EXTRA } from './strings-extra.js';
+
+export const STRINGS = {
   en: {
     appName: 'Calm Plan',
     tagline: 'A calm companion for your day',
@@ -6,7 +8,7 @@ const STRINGS = {
     navToday: 'Today',
     navMood: 'Mood',
     navChat: 'Chat',
-    navSettings: 'Settings',
+    navSettings: 'Data',
     todayTitle: 'Today',
     taskLabel: 'New task or habit',
     taskPlaceholder: 'For example: drink water, or call a friend',
@@ -68,11 +70,9 @@ const STRINGS = {
     chatTooLong: 'Your message is too long. Please keep it under 1000 characters.',
     chatSuggestions: 'Suggestions',
     chatLog: 'Conversation',
-    settingsTitle: 'Settings',
+    settingsTitle: 'Your data and about',
     languageTitle: 'Language',
-    languageLabel: 'Language',
-    themeTitle: 'Appearance',
-    themeLabel: 'Theme',
+    themeTitle: 'Theme',
     themeSystem: 'Match my device',
     themeLight: 'Light',
     themeDark: 'Dark',
@@ -106,7 +106,7 @@ const STRINGS = {
     navToday: 'اليوم',
     navMood: 'المزاج',
     navChat: 'الدردشة',
-    navSettings: 'الإعدادات',
+    navSettings: 'بياناتي',
     todayTitle: 'اليوم',
     taskLabel: 'مهمة أو عادة جديدة',
     taskPlaceholder: 'مثال: اشرب كوب ماء، أو اتصل بصديق',
@@ -167,11 +167,9 @@ const STRINGS = {
     chatTooLong: 'رسالتك طويلة جدًا. من فضلك اجعلها أقل من 1000 حرف.',
     chatSuggestions: 'اقتراحات',
     chatLog: 'المحادثة',
-    settingsTitle: 'الإعدادات',
+    settingsTitle: 'بياناتك وحول التطبيق',
     languageTitle: 'اللغة',
-    languageLabel: 'اللغة',
-    themeTitle: 'المظهر',
-    themeLabel: 'السمة',
+    themeTitle: 'السمة',
     themeSystem: 'حسب الجهاز',
     themeLight: 'فاتح',
     themeDark: 'داكن',
@@ -235,3 +233,6 @@ export function setLang(lang) {
   applyI18n(document);
   document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: current } }));
 }
+
+Object.assign(STRINGS.en, EXTRA.en);
+Object.assign(STRINGS.ar, EXTRA.ar);

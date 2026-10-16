@@ -1,6 +1,8 @@
 import { api } from '../api.js';
 import { getLang, t } from '../i18n.js';
 import { el, errorMessage, setStatus, showCrisis } from '../ui.js';
+import { play } from '../sound.js';
+import { openBreathing } from '../breath.js';
 
 const MAX_HISTORY = 12;
 const MAX_CHARS = 1000;
@@ -10,7 +12,7 @@ let inputEl;
 let statusEl;
 let busy = false;
 
-function addBubble(role, text, meta = '') {
+function addBubble(role, text, meta = '', quiet = true) {
   const wrap = el('div', { className: `msg ${role}` }, [
     el('div', { text }),
     meta ? el('div', { className: 'msg-meta', text: meta }) : null,
@@ -18,6 +20,7 @@ function addBubble(role, text, meta = '') {
   const label = role === 'user' ? t('chatYou') : t('chatCompanion');
   wrap.setAttribute('aria-label', label);
   logEl.append(wrap);
+  if (!quiet) play('pop');
   logEl.scrollTop = logEl.scrollHeight;
 }
 
@@ -25,6 +28,7 @@ function renderChips() {
   const chips = document.getElementById('chat-chips');
   chips.setAttribute('aria-label', t('chatSuggestions'));
   chips.replaceChildren(
+    el('button', { type: 'button', className: 'chip chip-breath', 'data-breath': 'open', text: t('chipBreath') }),
     ...[1, 2, 3, 4].map((n) =>
       el('button', {
         type: 'button',
@@ -60,6 +64,7 @@ async function send(text) {
       'assistant',
       result.reply,
       result.source === 'anthropic' ? t('chatSourceApi') : t('chatSource'),
+      false,
     );
     history.push({ role: 'assistant', content: result.reply });
     history = history.slice(-MAX_HISTORY);
@@ -67,7 +72,7 @@ async function send(text) {
   } catch (err) {
     pending.remove();
     setStatus(statusEl, errorMessage(err), true);
-    addBubble('assistant', t('chatError'));
+    addBubble('assistant', t('chatError'), '', false);
     // Drop the unanswered user message so the next turn is well formed.
     history.pop();
   } finally {
@@ -105,6 +110,11 @@ export function initChat() {
   });
 
   document.getElementById('chat-chips').addEventListener('click', (event) => {
+    const breath = event.target.closest('button[data-breath]');
+    if (breath) {
+      openBreathing(breath);
+      return;
+    }
     const chip = event.target.closest('button[data-msg]');
     if (chip) send(chip.dataset.msg);
   });

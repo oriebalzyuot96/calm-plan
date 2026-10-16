@@ -1,11 +1,14 @@
 import { api } from '../api.js';
 import { t } from '../i18n.js';
-import { el, errorMessage, setStatus } from '../ui.js';
+import { el, errorMessage, pulse, setStatus } from '../ui.js';
+import { play } from '../sound.js';
 
 let tasks = [];
 let listEl;
 let emptyEl;
 let statusEl;
+let justDone = null;
+let lastAllDone = false;
 
 function sorted() {
   return [...tasks].sort((a, b) => a.position - b.position);
@@ -22,6 +25,44 @@ function formatDate(iso) {
   });
 }
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function tickSvg() {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('class', 'tick');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const path = document.createElementNS(SVG_NS, 'path');
+  path.setAttribute('d', 'M6 12.5l4 4 8-9');
+  path.setAttribute('pathLength', '1');
+  svg.append(path);
+  return svg;
+}
+
+/** Grows the plant with the share of tasks that are done. */
+function updatePlant() {
+  const plant = document.getElementById('plant');
+  const text = document.getElementById('plant-text');
+  const meter = document.getElementById('plant-meter');
+  if (!plant) return;
+  const total = tasks.length;
+  const done = tasks.filter((x) => x.done).length;
+  let stage = 0;
+  if (total > 0) {
+    const ratio = done / total;
+    stage = ratio === 1 ? 4 : ratio >= 0.6 ? 3 : ratio >= 0.3 ? 2 : done > 0 ? 1 : 0;
+  }
+  const allDone = total > 0 && done === total;
+  plant.dataset.stage = String(stage);
+  meter.dataset.pct = String(total ? Math.round((done / total) * 100) : 0);
+  meter.style.setProperty('--pct', total ? String(done / total) : '0');
+  if (!total) text.textContent = t('plantEmpty');
+  else if (allDone) text.textContent = t('plantAllDone');
+  else text.textContent = t('plantProgress', { done, total });
+  lastAllDone = allDone;
+}
+
 function render() {
   const items = sorted();
   emptyEl.hidden = items.length > 0;
@@ -30,15 +71,18 @@ function render() {
     const checkboxId = `task-cb-${task.id}`;
     const row = el(
       'li',
-      { className: `task${task.done ? ' done' : ''}`, 'data-id': task.id },
+      { className: `task${task.done ? ' done' : ''}${task.id === justDone ? ' just-done' : ''}`, 'data-id': task.id },
       [
         el('label', { className: 'task-main', for: checkboxId }, [
-          el('input', {
-            type: 'checkbox',
-            id: checkboxId,
-            'data-action': 'toggle',
-            checked: task.done,
-          }),
+          el('span', { className: 'check' }, [
+            el('input', {
+              type: 'checkbox',
+              id: checkboxId,
+              'data-action': 'toggle',
+              checked: task.done,
+            }),
+            tickSvg(),
+          ]),
           el('span', { className: 'task-title', text: task.title }),
         ]),
         el('span', {
@@ -73,15 +117,20 @@ function render() {
         ]),
       ],
     );
+    row.style.setProperty('--i', String(Math.min(index, 12)));
     listEl.append(row);
   });
+  justDone = null;
+  updatePlant();
 }
 
 async function load() {
   try {
     const data = await api.listTasks();
     tasks = data.tasks;
+    listEl.classList.add('fresh');
     render();
+    globalThis.setTimeout(() => listEl.classList.remove('fresh'), 1500);
   } catch (err) {
     setStatus(statusEl, errorMessage(err), true);
   }
@@ -153,8 +202,18 @@ export function initToday() {
     try {
       const { task } = await api.updateTask(id, { done: target.checked });
       tasks = tasks.map((x) => (x.id === id ? task : x));
+      const wasAll = lastAllDone;
+      justDone = task.done ? id : null;
       render();
-      setStatus(statusEl, task.done ? t('taskDone') : t('taskReopened'));
+      if (task.done && lastAllDone && !wasAll) {
+        pulse(document.getElementById('plant-card'), 'sparkle', 2600);
+        play('chimeAll');
+      } else if (task.done) {
+        play('chime');
+      } else {
+        play('tick');
+      }
+      setStatus(statusEl, task.done ? (lastAllDone ? t('taskAllDone') : t('taskDone')) : t('taskReopened'));
       refocus(id, 'toggle');
     } catch (err) {
       setStatus(statusEl, errorMessage(err), true);

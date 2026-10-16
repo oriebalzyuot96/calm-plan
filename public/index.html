@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="system">
+<html lang="ar" dir="rtl" data-theme="system" data-palette="sea" data-contrast="standard" data-text-size="1">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,38 +13,152 @@
 <body>
   <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
 
-  <header class="app-header">
-    <div class="brand">
-      <h1 data-i18n="appName">Calm Plan</h1>
-      <p class="tagline" data-i18n="tagline">A calm companion for your day</p>
+  <header class="app-header" id="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <circle class="logo-bg" cx="20" cy="20" r="19"/>
+          <g class="logo-whale">
+            <path class="c-whale" d="M6 22c0-6 5-10 12-10 6 0 10 3 11 8 1-2 3-4 6-4-1 5-3 8-7 9-3 4-9 6-14 4-5-1-8-3-8-7z"/>
+            <circle class="c-eye" cx="12" cy="21" r="1.3"/>
+          </g>
+          <path class="logo-spout" d="M15 11c-1-3-3-4-4-4m4 4c1-3 3-4 4-4" fill="none"/>
+        </svg>
+        <div class="brand-text">
+          <h1 data-i18n="appName">Calm Plan</h1>
+          <p class="tagline" data-i18n="tagline">A calm companion for your day</p>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main" data-i18n-attr="aria-label:mainNav">
+        <ul class="tabs">
+          <li><a href="#today" data-route="today">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>
+            <span data-i18n="navToday">Today</span></a></li>
+          <li><a href="#mood" data-route="mood">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8.5 14c1 1.8 2.2 2.5 3.5 2.5s2.5-.7 3.5-2.5"/><path d="M9 9.5v.5M15 9.5v.5"/></svg>
+            <span data-i18n="navMood">Mood</span></a></li>
+          <li><a href="#meditate" data-route="meditate">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="2.5"/><path d="M5 19c1-4 3.5-6 7-6s6 2 7 6"/><path d="M3 15c3 1 5 1 9 1s6 0 9-1"/></svg>
+            <span data-i18n="navMeditate">Meditate</span></a></li>
+          <li><a href="#chat" data-route="chat">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v9a2 2 0 01-2 2h-7l-4 3v-3H6a2 2 0 01-2-2z"/></svg>
+            <span data-i18n="navChat">Chat</span></a></li>
+          <li><a href="#settings" data-route="settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/></svg>
+            <span data-i18n="navSettings">Data</span></a></li>
+        </ul>
+      </nav>
+
+      <button type="button" class="icon-btn gear" id="open-drawer" aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false" data-i18n-attr="aria-label:openSettings;title:openSettings">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg>
+      </button>
     </div>
-    <nav aria-label="Main">
-      <ul class="tabs">
-        <li><a href="#today" data-route="today" data-i18n="navToday">Today</a></li>
-        <li><a href="#mood" data-route="mood" data-i18n="navMood">Mood</a></li>
-        <li><a href="#chat" data-route="chat" data-i18n="navChat">Chat</a></li>
-        <li><a href="#settings" data-route="settings" data-i18n="navSettings">Settings</a></li>
-      </ul>
-    </nav>
+    <p class="safety-chip">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M12 8v5M12 16v.5"/></svg>
+      <span data-i18n="safetyChip">Not therapy. Not a diagnosis.</span>
+    </p>
   </header>
 
+  <div class="hero" aria-hidden="true">
+    <svg class="scene hero-scene" viewBox="0 0 800 190" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <defs>
+        <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop class="st-sky-a" offset="0"/>
+          <stop class="st-sky-b" offset="1"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="190" fill="url(#g-sky)"/>
+      <g class="stars-hero">
+        <circle class="star twinkle t1" cx="90" cy="28" r="1.6"/>
+        <circle class="star twinkle t2" cx="210" cy="48" r="1.2"/>
+        <circle class="star twinkle t3" cx="470" cy="22" r="1.5"/>
+        <circle class="star twinkle t1" cx="560" cy="52" r="1.1"/>
+      </g>
+      <circle class="sun-glow breathe" cx="660" cy="72" r="46"/>
+      <circle class="sun breathe" cx="660" cy="72" r="26"/>
+      <g class="cloud drift"><ellipse cx="150" cy="62" rx="44" ry="11"/><ellipse cx="180" cy="55" rx="28" ry="10"/><ellipse cx="124" cy="56" rx="22" ry="8"/></g>
+      <g class="cloud drift slow"><ellipse cx="430" cy="44" rx="36" ry="9"/><ellipse cx="452" cy="38" rx="22" ry="8"/></g>
+      <g class="waves wave-back"><path d="M0 120q50-14 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0V190H0z"/></g>
+      <g transform="translate(300 62)">
+        <g class="whale-float">
+          <path class="spout" d="M62 -2q-4-16-16-20M62 -2q4-16 16-20" />
+          <path class="c-whale" d="M0 40C0 12 40-8 90-4c40 2 70 22 80 44 5 12 15 12 30-2-2 20-14 28-30 24-20 18-70 22-110 14C25 70 0 62 0 40z"/>
+          <path class="c-belly" d="M12 52c30 14 90 14 140 0-14 22-110 28-140 0z"/>
+          <path class="c-whale-dark" d="M82 62q14 14 34 12-10-14-20-22z"/>
+          <circle class="c-eye" cx="30" cy="36" r="3.2"/>
+          <path class="c-cheek" d="M42 46q6 3 12 0" fill="none"/>
+        </g>
+      </g>
+      <g class="waves wave-mid"><path d="M0 138q50-14 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0V190H0z"/></g>
+      <g class="waves wave-front"><path d="M0 156q50-14 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0V190H0z"/></g>
+    </svg>
+  </div>
+
   <aside class="notice" aria-label="Important information">
-    <p lang="en" dir="ltr"><strong>Please note:</strong> Calm Plan is a self-help tool. It is <strong>not therapy</strong>, it does not diagnose anything, and it is <strong>not a replacement for a doctor or a crisis service</strong>. If you may harm yourself, call your local emergency number now.</p>
-    <p lang="ar" dir="rtl"><strong>تنبيه:</strong> خطة الهدوء أداة لدعم الذات. وهي <strong>ليست علاجًا نفسيًا</strong>، ولا تشخص أي حالة، و<strong>ليست بديلًا عن الطبيب أو خدمات الطوارئ والأزمات</strong>. إذا كنت تفكر في إيذاء نفسك، فاتصل الآن برقم الطوارئ في بلدك.</p>
+    <svg class="notice-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M12 8v5M12 16v.5"/></svg>
+    <div class="notice-text">
+      <p lang="en" dir="ltr"><strong>Please note:</strong> Calm Plan is a self-help tool. It is <strong>not therapy</strong>, it does not diagnose anything, and it is <strong>not a replacement for a doctor or a crisis service</strong>. If you may harm yourself, call your local emergency number now.</p>
+      <p lang="ar" dir="rtl"><strong>تنبيه:</strong> خطة الهدوء أداة لدعم الذات. وهي <strong>ليست علاجًا نفسيًا</strong>، ولا تشخص أي حالة، و<strong>ليست بديلًا عن الطبيب أو خدمات الطوارئ والأزمات</strong>. إذا كنت تفكر في إيذاء نفسك، فاتصل الآن برقم الطوارئ في بلدك.</p>
+    </div>
   </aside>
 
   <section id="crisis" class="crisis" role="alert" aria-labelledby="crisis-title" tabindex="-1" hidden>
-    <h2 id="crisis-title" data-crisis-title></h2>
-    <p data-crisis-body></p>
-    <ol data-crisis-steps></ol>
-    <p data-crisis-prompt></p>
-    <button type="button" class="btn ghost" data-crisis-dismiss data-i18n="crisisDismiss">Hide this message</button>
+    <svg class="crisis-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.400-7 10-7 10z"/></svg>
+    <div class="crisis-body">
+      <h2 id="crisis-title" data-crisis-title></h2>
+      <p data-crisis-body></p>
+      <ol data-crisis-steps></ol>
+      <p data-crisis-prompt></p>
+      <button type="button" class="btn ghost" data-crisis-dismiss data-i18n="crisisDismiss">Hide this message</button>
+    </div>
   </section>
 
   <main id="main" tabindex="-1">
     <!-- TODAY -->
     <section class="view" data-view="today" aria-labelledby="h-today" hidden>
       <h2 id="h-today" tabindex="-1" data-i18n="todayTitle">Today</h2>
+
+      <div class="card plant-card" id="plant-card">
+        <svg class="scene plant" id="plant" viewBox="0 0 160 200" data-stage="0" aria-hidden="true" focusable="false">
+          <ellipse class="plant-shadow" cx="80" cy="192" rx="46" ry="6"/>
+          <g class="sway">
+            <path class="stem g0" d="M80 160V132"/>
+            <path class="stem pg g2" d="M80 132V98"/>
+            <path class="stem pg g3" d="M80 98V66"/>
+            <g class="pg g1"><path class="leaf" d="M80 138c-16-2-24-12-26-22 14 0 25 8 26 22z"/><path class="leaf" d="M80 138c14-2 22-10 24-20-13 0-23 6-24 20z"/></g>
+            <g class="pg g2"><path class="leaf leaf2" d="M80 112c-18-2-28-12-30-24 16 0 29 9 30 24z"/><path class="leaf leaf2" d="M80 106c16-2 26-10 28-22-15 0-27 8-28 22z"/></g>
+            <g class="pg g3"><path class="leaf" d="M80 84c-14-2-22-10-24-20 12 0 22 7 24 20z"/><path class="leaf" d="M80 78c13-2 20-8 22-18-11 0-20 6-22 18z"/></g>
+            <g transform="translate(80 54)">
+             <g class="pg g4">
+              <g class="bloom">
+                <ellipse class="petal" cx="0" cy="-14" rx="7" ry="12"/>
+                <ellipse class="petal" cx="13" cy="-4" rx="7" ry="12" transform="rotate(72 13 -4)"/>
+                <ellipse class="petal" cx="8" cy="12" rx="7" ry="12" transform="rotate(144 8 12)"/>
+                <ellipse class="petal" cx="-8" cy="12" rx="7" ry="12" transform="rotate(216 -8 12)"/>
+                <ellipse class="petal" cx="-13" cy="-4" rx="7" ry="12" transform="rotate(288 -13 -4)"/>
+                <circle class="flower-core" cx="0" cy="0" r="7"/>
+              </g>
+             </g>
+            </g>
+          </g>
+          <path class="pot" d="M46 164h68l-7 28a6 6 0 01-6 4H59a6 6 0 01-6-4z"/>
+          <path class="pot-rim" d="M42 160h76v8H42z"/>
+          <g class="sparkles">
+            <g transform="translate(40 60)"><path class="spark s1" d="M0-8L2-2 8 0 2 2 0 8-2 2-8 0-2-2z"/></g>
+            <g transform="translate(122 48)"><path class="spark s2" d="M0-8L2-2 8 0 2 2 0 8-2 2-8 0-2-2z"/></g>
+            <g transform="translate(112 100)"><path class="spark s3" d="M0-6L1.5-1.500 6 0 1.500 1.500 0 6-1.500 1.500-6 0-1.500-1.500z"/></g>
+            <g transform="translate(30 110)"><path class="spark s4" d="M0-6L1.500-1.500 6 0 1.500 1.500 0 6-1.500 1.500-6 0-1.500-1.500z"/></g>
+            <g transform="translate(80 18)"><path class="spark s5" d="M0-7L2-2 7 0 2 2 0 7-2 2-7 0-2-2z"/></g>
+          </g>
+        </svg>
+        <div class="plant-text">
+          <h3 class="section-title" data-i18n="plantLabel">Your habit plant</h3>
+          <p id="plant-text" class="plant-progress"></p>
+          <div class="meter" aria-hidden="true"><span class="meter-fill" id="plant-meter"></span></div>
+        </div>
+      </div>
+
       <form id="task-form" class="card form-row" novalidate>
         <div class="field grow">
           <label for="task-title" data-i18n="taskLabel">New task or habit</label>
@@ -63,7 +177,22 @@
       </form>
 
       <h3 class="section-title" data-i18n="listTitle">Your list</h3>
-      <p class="muted" id="task-empty" hidden data-i18n="emptyTasks">Nothing here yet. Add one small task or one wellbeing habit.</p>
+      <div class="empty" id="task-empty" hidden>
+        <svg class="scene moon" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <circle class="star twinkle t1" cx="22" cy="28" r="2"/>
+          <circle class="star twinkle t2" cx="100" cy="24" r="1.600"/>
+          <circle class="star twinkle t3" cx="96" cy="78" r="1.800"/>
+          <g class="moon-float">
+            <path class="moon-body" d="M70 14A46 46 0 1 0 104 82 38 38 0 0 1 70 14z"/>
+            <path class="moon-eye" d="M42 62q6 6 12 0" fill="none"/>
+            <circle class="moon-cheek" cx="40" cy="74" r="4"/>
+          </g>
+          <text class="zzz z1" x="86" y="46">z</text>
+          <text class="zzz z2" x="96" y="34">z</text>
+          <text class="zzz z3" x="106" y="20">z</text>
+        </svg>
+        <p class="muted" data-i18n="emptyTasks">Nothing here yet. Add one small task or one wellbeing habit.</p>
+      </div>
       <ol class="task-list" id="task-list" aria-label="Tasks and habits"></ol>
     </section>
 
@@ -71,14 +200,42 @@
     <section class="view" data-view="mood" aria-labelledby="h-mood" hidden>
       <h2 id="h-mood" tabindex="-1" data-i18n="moodTitle">Mood check-in</h2>
       <form id="mood-form" class="card" novalidate>
+        <svg class="scene sunrise" id="sunrise" viewBox="0 0 240 110" data-score="0" role="img" focusable="false" data-i18n-attr="aria-label:sunriseLabel">
+          <defs>
+            <linearGradient id="g-dawn" x1="0" y1="0" x2="0" y2="1">
+              <stop class="st-sky-a" offset="0"/>
+              <stop class="st-dawn" offset="1"/>
+            </linearGradient>
+          </defs>
+          <rect width="240" height="110" rx="14" fill="url(#g-dawn)"/>
+          <g class="sun-g">
+            <g class="rays breathe-slow">
+              <path d="M120 10v12M120 98v-4M60 40l9 7M180 40l-9 7M44 66h12M184 66h12"/>
+            </g>
+            <circle class="sun-glow" cx="120" cy="64" r="34"/>
+            <circle class="sun" cx="120" cy="64" r="22"/>
+          </g>
+          <path class="hill hill-a" d="M0 84q40-18 80-6t80 0 80-8v40H0z"/>
+          <path class="hill hill-b" d="M0 96q50-16 100-4t140-4v22H0z"/>
+        </svg>
         <fieldset class="mood-fieldset">
           <legend data-i18n="moodQuestion">How are you feeling right now?</legend>
           <div class="mood-group" role="radiogroup" id="mood-group" data-i18n-attr="aria-label:moodQuestion">
-            <button type="button" role="radio" aria-checked="false" data-score="1" class="mood-btn" tabindex="-1"><span class="mood-num">1</span><span data-i18n="mood1">Very low</span></button>
-            <button type="button" role="radio" aria-checked="false" data-score="2" class="mood-btn" tabindex="-1"><span class="mood-num">2</span><span data-i18n="mood2">Low</span></button>
-            <button type="button" role="radio" aria-checked="false" data-score="3" class="mood-btn" tabindex="-1"><span class="mood-num">3</span><span data-i18n="mood3">Okay</span></button>
-            <button type="button" role="radio" aria-checked="false" data-score="4" class="mood-btn" tabindex="-1"><span class="mood-num">4</span><span data-i18n="mood4">Good</span></button>
-            <button type="button" role="radio" aria-checked="false" data-score="5" class="mood-btn" tabindex="-1"><span class="mood-num">5</span><span data-i18n="mood5">Great</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="1" data-value="1" class="mood-btn" tabindex="-1">
+              <svg class="face" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="17"/><path d="M13 16v1M27 16v1"/><path d="M12 29q8-9 16 0"/></svg>
+              <span class="mood-num">1</span><span data-i18n="mood1">Very low</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="2" data-value="2" class="mood-btn" tabindex="-1">
+              <svg class="face" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="17"/><path d="M13 16v1M27 16v1"/><path d="M13 28q7-5 14 0"/></svg>
+              <span class="mood-num">2</span><span data-i18n="mood2">Low</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="3" data-value="3" class="mood-btn" tabindex="-1">
+              <svg class="face" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="17"/><path d="M13 16v1M27 16v1"/><path d="M14 27h12"/></svg>
+              <span class="mood-num">3</span><span data-i18n="mood3">Okay</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="4" data-value="4" class="mood-btn" tabindex="-1">
+              <svg class="face" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="17"/><path d="M13 16v1M27 16v1"/><path d="M13 25q7 6 14 0"/></svg>
+              <span class="mood-num">4</span><span data-i18n="mood4">Good</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="5" data-value="5" class="mood-btn" tabindex="-1">
+              <svg class="face" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="17"/><path d="M13 15q2-3 3 0M24 15q2-3 3 0"/><path d="M11 23q9 11 18 0z"/></svg>
+              <span class="mood-num">5</span><span data-i18n="mood5">Great</span></button>
           </div>
         </fieldset>
         <div class="field">
@@ -94,12 +251,112 @@
       <h3 class="section-title" data-i18n="chartTitle">The last 14 days</h3>
       <div class="card">
         <div id="mood-chart" class="chart-wrap" dir="ltr"></div>
+        <div class="empty small" id="chart-empty" hidden>
+          <svg class="scene moon" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="star twinkle t2" cx="22" cy="28" r="2"/>
+            <circle class="star twinkle t1" cx="100" cy="30" r="1.600"/>
+            <g class="moon-float">
+              <path class="moon-body" d="M70 14A46 46 0 1 0 104 82 38 38 0 0 1 70 14z"/>
+              <path class="moon-eye" d="M42 62q6 6 12 0" fill="none"/>
+              <circle class="moon-cheek" cx="40" cy="74" r="4"/>
+            </g>
+            <text class="zzz z1" x="86" y="46">z</text>
+            <text class="zzz z2" x="96" y="34">z</text>
+          </svg>
+          <p class="muted" data-i18n="moonEmpty">It is quiet here for now.</p>
+        </div>
         <p class="muted" id="mood-summary"></p>
         <table class="sr-only" id="mood-table">
           <caption data-i18n="chartTableCaption">Mood by day</caption>
           <thead><tr><th scope="col" data-i18n="dayHeader">Day</th><th scope="col" data-i18n="scoreHeader">Average score</th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- MEDITATE -->
+    <section class="view" data-view="meditate" aria-labelledby="h-meditate" hidden>
+      <h2 id="h-meditate" tabindex="-1" data-i18n="medTitle">Meditation</h2>
+      <p class="muted" data-i18n="medIntro">Short guided sessions with calm sound.</p>
+
+      <div id="med-picker">
+        <div class="card">
+          <h3 class="section-title" id="med-sessions-h" data-i18n="medSessions">Sessions</h3>
+          <div class="session-grid" id="session-grid" role="radiogroup" aria-labelledby="med-sessions-h"></div>
+        </div>
+
+        <div class="card">
+          <h3 class="section-title" id="med-music-h" data-i18n="medSoundscapes">Music</h3>
+          <div class="scape-grid" id="scape-grid" role="radiogroup" aria-labelledby="med-music-h">
+            <button type="button" role="radio" class="chip-radio" data-value="none" aria-checked="false" tabindex="-1" data-i18n="medScapeNone">Silence</button>
+            <button type="button" role="radio" class="chip-radio" data-value="drone" aria-checked="false" tabindex="-1" data-i18n="medScapeDrone">Warm pad</button>
+            <button type="button" role="radio" class="chip-radio" data-value="bowls" aria-checked="false" tabindex="-1" data-i18n="medScapeBowls">Singing bowls</button>
+            <button type="button" role="radio" class="chip-radio" data-value="rain" aria-checked="false" tabindex="-1" data-i18n="medScapeRain">Soft rain</button>
+            <button type="button" role="radio" class="chip-radio" data-value="ocean" aria-checked="false" tabindex="-1" data-i18n="medScapeOcean">Ocean swell</button>
+          </div>
+
+          <div class="field slider-field">
+            <label for="med-volume" data-i18n="medMusicVolume">Music volume</label>
+            <input id="med-volume" type="range" min="0" max="100" step="1" value="70">
+          </div>
+
+          <h4 class="sub-title" id="med-sleep-h" data-i18n="medSleepTimer">Sleep timer</h4>
+          <div class="scape-grid" id="sleep-grid" role="radiogroup" aria-labelledby="med-sleep-h">
+            <button type="button" role="radio" class="chip-radio" data-value="0" aria-checked="false" tabindex="-1" data-i18n="medSleepOff">Off</button>
+            <button type="button" role="radio" class="chip-radio" data-value="5" aria-checked="false" tabindex="-1">5</button>
+            <button type="button" role="radio" class="chip-radio" data-value="10" aria-checked="false" tabindex="-1">10</button>
+            <button type="button" role="radio" class="chip-radio" data-value="15" aria-checked="false" tabindex="-1">15</button>
+            <button type="button" role="radio" class="chip-radio" data-value="30" aria-checked="false" tabindex="-1">30</button>
+          </div>
+
+          <div class="field toggle-field">
+            <input id="med-mix" type="checkbox" class="switch" role="switch">
+            <label for="med-mix" data-i18n="medMix">Soft chime at each step</label>
+          </div>
+          <p class="muted" id="med-sound-note"></p>
+          <button type="button" class="btn primary" id="med-begin" data-i18n="medBegin">Begin session</button>
+        </div>
+      </div>
+
+      <div id="med-player" class="card player" hidden>
+        <h3 class="section-title" id="med-now-title"></h3>
+        <div class="orb-stage" id="med-orb" data-orb>
+          <svg class="orb-ring" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+            <circle class="ring-bg" cx="100" cy="100" r="92"/>
+            <circle class="ring-fg" cx="100" cy="100" r="92" pathLength="100"/>
+          </svg>
+          <div class="orb" aria-hidden="true"></div>
+          <div class="orb-text" aria-hidden="true">
+            <span class="orb-phase"></span>
+            <span class="orb-count"></span>
+          </div>
+        </div>
+        <p class="clock"><span class="muted" data-i18n="medRemaining">Time left</span> <strong id="med-clock" dir="ltr">0:00</strong></p>
+        <p class="med-step" id="med-step"></p>
+        <p class="sr-only" id="med-live" role="status" aria-live="polite"></p>
+        <div class="form-actions center">
+          <button type="button" class="btn primary" id="med-pause" data-i18n="medPause">Pause</button>
+          <button type="button" class="btn ghost" id="med-end" data-i18n="medEnd">End session</button>
+        </div>
+        <p class="status" id="med-status" role="status"></p>
+      </div>
+
+      <div id="med-done" class="card done-card" hidden>
+        <svg class="scene moon" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <circle class="star twinkle t1" cx="22" cy="28" r="2"/>
+          <circle class="star twinkle t3" cx="98" cy="30" r="1.800"/>
+          <g class="moon-float">
+            <path class="moon-body" d="M70 14A46 46 0 1 0 104 82 38 38 0 0 1 70 14z"/>
+            <path class="moon-eye" d="M42 62q6 6 12 0" fill="none"/>
+            <circle class="moon-cheek" cx="40" cy="74" r="4"/>
+          </g>
+        </svg>
+        <h3 class="section-title" id="med-done-title" tabindex="-1" data-i18n="medDoneTitle">Session complete</h3>
+        <p data-i18n="medDoneText">Well done for taking this time. Notice how you feel now.</p>
+        <div class="form-actions center">
+          <a class="btn primary" href="#mood" id="med-done-mood" data-i18n="medDoneMood">Log a mood check-in</a>
+          <button type="button" class="btn ghost" id="med-done-back" data-i18n="medDoneAgain">Back to sessions</button>
+        </div>
       </div>
     </section>
 
@@ -121,37 +378,9 @@
       </div>
     </section>
 
-    <!-- SETTINGS -->
+    <!-- DATA AND ABOUT -->
     <section class="view" data-view="settings" aria-labelledby="h-settings" hidden>
-      <h2 id="h-settings" tabindex="-1" data-i18n="settingsTitle">Settings</h2>
-
-      <div class="card">
-        <h3 class="section-title" data-i18n="languageTitle">Language</h3>
-        <div class="field">
-          <label for="lang-select" data-i18n="languageLabel">Language</label>
-          <select id="lang-select">
-            <option value="ar">العربية</option>
-            <option value="en">English</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3 class="section-title" data-i18n="themeTitle">Appearance</h3>
-        <div class="field">
-          <label for="theme-select" data-i18n="themeLabel">Theme</label>
-          <select id="theme-select">
-            <option value="system" data-i18n="themeSystem">System</option>
-            <option value="light" data-i18n="themeLight">Light</option>
-            <option value="dark" data-i18n="themeDark">Dark</option>
-          </select>
-        </div>
-        <div class="field toggle-field">
-          <input id="motion-toggle" type="checkbox" class="switch" role="switch">
-          <label for="motion-toggle" data-i18n="reduceMotion">Reduce motion</label>
-        </div>
-        <p class="muted" data-i18n="motionHint">Your system's reduce-motion setting is always respected.</p>
-      </div>
+      <h2 id="h-settings" tabindex="-1" data-i18n="settingsTitle">Your data and about</h2>
 
       <div class="card">
         <h3 class="section-title" data-i18n="privacyTitle">Your data</h3>
@@ -171,6 +400,189 @@
   <footer class="app-footer">
     <p data-i18n="footerText">Calm Plan is a self-help tool, not therapy and not a diagnosis.</p>
   </footer>
+
+  <!-- SETTINGS DRAWER -->
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" inert>
+    <div class="drawer-head">
+      <h2 id="drawer-title" data-i18n="drawerTitle">Settings</h2>
+      <button type="button" class="icon-btn" id="drawer-close" data-i18n-attr="aria-label:drawerClose;title:drawerClose">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <section class="d-sec" aria-labelledby="d-theme">
+        <h3 id="d-theme" data-i18n="themeTitle">Theme</h3>
+        <div class="tiles tiles-3" role="radiogroup" aria-labelledby="d-theme" data-pref="theme" data-kind="reveal">
+          <button type="button" role="radio" class="tile" data-value="system" aria-checked="false" tabindex="-1">
+            <span class="pv pv-system" aria-hidden="true"><span class="pv-half pv-l"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span><span class="pv-half pv-d"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span></span>
+            <span class="tile-label" data-i18n="themeSystem">Match my device</span></button>
+          <button type="button" role="radio" class="tile" data-value="light" aria-checked="false" tabindex="-1">
+            <span class="pv pv-light" aria-hidden="true"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span>
+            <span class="tile-label" data-i18n="themeLight">Light</span></button>
+          <button type="button" role="radio" class="tile" data-value="dark" aria-checked="false" tabindex="-1">
+            <span class="pv pv-dark" aria-hidden="true"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span>
+            <span class="tile-label" data-i18n="themeDark">Dark</span></button>
+        </div>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-palette">
+        <h3 id="d-palette" data-i18n="paletteTitle">Colour themes</h3>
+        <div class="tiles tiles-2" role="radiogroup" aria-labelledby="d-palette" data-pref="palette" data-kind="fade">
+          <button type="button" role="radio" class="tile" data-value="sea" aria-checked="false" tabindex="-1">
+            <svg class="pal pal-sea" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+              <rect class="p-a" width="96" height="60"/><circle class="p-d a-pulse" cx="72" cy="18" r="8"/>
+              <g class="a-wave"><path class="p-b" d="M0 38q12-8 24 0t24 0t24 0t24 0t24 0t24 0V60H0z"/></g>
+              <g class="a-wave slow"><path class="p-c" d="M0 46q12-8 24 0t24 0t24 0t24 0t24 0t24 0V60H0z"/></g>
+              <circle class="p-bub a-rise" cx="30" cy="40" r="2"/><circle class="p-bub a-rise late" cx="40" cy="42" r="1.5"/>
+            </svg>
+            <span class="tile-label" data-i18n="palSea">Calm sea</span></button>
+          <button type="button" role="radio" class="tile" data-value="sage" aria-checked="false" tabindex="-1">
+            <svg class="pal pal-sage" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+              <rect class="p-a" width="96" height="60"/><circle class="p-d a-pulse" cx="22" cy="16" r="8"/>
+              <path class="p-b" d="M0 40q24-14 48-4t48-6V60H0z"/><path class="p-c" d="M0 50q30-10 60-2t36-4V60H0z"/>
+              <g class="a-sway"><path class="p-leaf" d="M66 46c-10-2-14-10-14-18 9 2 14 8 14 18z"/></g>
+              <g class="a-sway late"><path class="p-leaf" d="M76 48c8-2 12-8 12-15-8 2-12 7-12 15z"/></g>
+            </svg>
+            <span class="tile-label" data-i18n="palSage">Sage garden</span></button>
+          <button type="button" role="radio" class="tile" data-value="lavender" aria-checked="false" tabindex="-1">
+            <svg class="pal pal-lavender" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+              <rect class="p-a" width="96" height="60"/><circle class="p-d a-pulse" cx="70" cy="18" r="8"/>
+              <circle class="p-star a-twinkle" cx="16" cy="12" r="1.500"/><circle class="p-star a-twinkle late" cx="34" cy="22" r="1.200"/><circle class="p-star a-twinkle later" cx="50" cy="10" r="1.500"/>
+              <path class="p-b" d="M0 44q20-12 40-4t56-8V60H0z"/><path class="p-c" d="M0 52q30-8 56-2t40-4V60H0z"/>
+            </svg>
+            <span class="tile-label" data-i18n="palLavender">Lavender dusk</span></button>
+          <button type="button" role="radio" class="tile" data-value="sand" aria-checked="false" tabindex="-1">
+            <svg class="pal pal-sand" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+              <rect class="p-a" width="96" height="60"/><circle class="p-d a-pulse" cx="48" cy="30" r="12"/>
+              <path class="p-b" d="M0 42q24-12 48-2t48-4V60H0z"/><path class="p-c" d="M0 52q36-12 70-2t26-2V60H0z"/>
+              <path class="p-bird a-drift" d="M14 14q3-3 6 0q3-3 6 0" fill="none"/>
+            </svg>
+            <span class="tile-label" data-i18n="palSand">Warm sand</span></button>
+          <button type="button" role="radio" class="tile" data-value="rose" aria-checked="false" tabindex="-1">
+            <svg class="pal pal-rose" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+              <rect class="p-a" width="96" height="60"/>
+              <g class="a-fall"><ellipse class="p-d" cx="20" cy="8" rx="4" ry="2.500" transform="rotate(30 20 8)"/></g>
+              <g class="a-fall late"><ellipse class="p-d" cx="52" cy="4" rx="4" ry="2.500" transform="rotate(-20 52 4)"/></g>
+              <g class="a-fall later"><ellipse class="p-d" cx="78" cy="10" rx="4" ry="2.500" transform="rotate(10 78 10)"/></g>
+              <path class="p-b" d="M0 46q24-10 48-2t48-4V60H0z"/>
+              <g class="a-sway"><circle class="p-c" cx="48" cy="36" r="8"/><circle class="p-d" cx="48" cy="36" r="3.500"/></g>
+            </svg>
+            <span class="tile-label" data-i18n="palRose">Rose</span></button>
+          <button type="button" role="radio" class="tile" data-value="midnight" aria-checked="false" tabindex="-1">
+            <svg class="pal pal-midnight" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+              <rect class="p-a" width="96" height="60"/>
+              <circle class="p-star a-twinkle" cx="14" cy="12" r="1.500"/><circle class="p-star a-twinkle late" cx="40" cy="8" r="1.200"/><circle class="p-star a-twinkle later" cx="64" cy="20" r="1.500"/><circle class="p-star a-twinkle" cx="84" cy="9" r="1.200"/>
+              <path class="p-d a-shoot" d="M60 6l-14 8" fill="none"/>
+              <path class="p-c" d="M0 46q24-10 48-2t48-6V60H0z"/><circle class="p-b" cx="20" cy="26" r="6"/>
+            </svg>
+            <span class="tile-label" data-i18n="palMidnight">Midnight</span></button>
+        </div>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-accent">
+        <h3 id="d-accent" data-i18n="accentTitle">Accent colour</h3>
+        <div class="swatches" role="radiogroup" id="swatches" aria-labelledby="d-accent">
+          <button type="button" role="radio" class="swatch swatch-auto" data-value="auto" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accentAuto;title:accentAuto"></button>
+          <button type="button" role="radio" class="swatch" data-value="160" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accTeal;title:accTeal"></button>
+          <button type="button" role="radio" class="swatch" data-value="205" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accBlue;title:accBlue"></button>
+          <button type="button" role="radio" class="swatch" data-value="255" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accViolet;title:accViolet"></button>
+          <button type="button" role="radio" class="swatch" data-value="320" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accPink;title:accPink"></button>
+          <button type="button" role="radio" class="swatch" data-value="20" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accOrange;title:accOrange"></button>
+          <button type="button" role="radio" class="swatch" data-value="45" aria-checked="false" tabindex="-1" data-i18n-attr="aria-label:accGold;title:accGold"></button>
+        </div>
+        <div class="field slider-field">
+          <label for="hue" data-i18n="accentHue">Custom hue</label>
+          <input id="hue" class="hue-slider" type="range" min="0" max="359" step="1" value="190">
+        </div>
+        <p class="muted small-text" data-i18n="accentNote">Colours are adjusted automatically so text and buttons stay easy to read.</p>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-contrast">
+        <h3 id="d-contrast" data-i18n="contrastTitle">Contrast</h3>
+        <div class="tiles tiles-2" role="radiogroup" aria-labelledby="d-contrast" data-pref="contrast" data-kind="reveal">
+          <button type="button" role="radio" class="tile" data-value="standard" aria-checked="false" tabindex="-1">
+            <span class="pv pv-light" aria-hidden="true"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span>
+            <span class="tile-label" data-i18n="conStandard">Standard</span></button>
+          <button type="button" role="radio" class="tile" data-value="high" aria-checked="false" tabindex="-1">
+            <span class="pv pv-high" aria-hidden="true"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span>
+            <span class="tile-label" data-i18n="conHigh">High</span></button>
+          <button type="button" role="radio" class="tile" data-value="by" aria-checked="false" tabindex="-1">
+            <span class="pv pv-by" aria-hidden="true"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span>
+            <span class="tile-label" data-i18n="conBy">Black and yellow</span></button>
+          <button type="button" role="radio" class="tile" data-value="gray" aria-checked="false" tabindex="-1">
+            <span class="pv pv-gray" aria-hidden="true"><i class="pv-bar"></i><i class="pv-line"></i><i class="pv-btn"></i></span>
+            <span class="tile-label" data-i18n="conGray">Grayscale</span></button>
+        </div>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-size">
+        <h3 id="d-size" data-i18n="textSizeTitle">Text size</h3>
+        <div class="tiles tiles-4" role="radiogroup" aria-labelledby="d-size" data-pref="textSize" data-kind="none">
+          <button type="button" role="radio" class="tile size-tile" data-value="0" aria-checked="false" tabindex="-1"><span class="ts ts0" aria-hidden="true">A</span><span class="tile-label" data-i18n="size0">Small</span></button>
+          <button type="button" role="radio" class="tile size-tile" data-value="1" aria-checked="false" tabindex="-1"><span class="ts ts1" aria-hidden="true">A</span><span class="tile-label" data-i18n="size1">Medium</span></button>
+          <button type="button" role="radio" class="tile size-tile" data-value="2" aria-checked="false" tabindex="-1"><span class="ts ts2" aria-hidden="true">A</span><span class="tile-label" data-i18n="size2">Large</span></button>
+          <button type="button" role="radio" class="tile size-tile" data-value="3" aria-checked="false" tabindex="-1"><span class="ts ts3" aria-hidden="true">A</span><span class="tile-label" data-i18n="size3">Extra large</span></button>
+        </div>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-lang">
+        <h3 id="d-lang" data-i18n="languageTitle">Language</h3>
+        <div class="tiles tiles-2" role="radiogroup" aria-labelledby="d-lang" data-pref="lang" data-kind="none">
+          <button type="button" role="radio" class="tile lang-tile" data-value="ar" lang="ar" aria-checked="false" tabindex="-1"><span class="tile-label">العربية</span></button>
+          <button type="button" role="radio" class="tile lang-tile" data-value="en" lang="en" aria-checked="false" tabindex="-1"><span class="tile-label">English</span></button>
+        </div>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-motion">
+        <h3 id="d-motion" data-i18n="motionTitle">Motion</h3>
+        <div class="field toggle-field">
+          <input id="motion-toggle" type="checkbox" class="switch" role="switch">
+          <label for="motion-toggle" data-i18n="reduceMotion">Reduce motion</label>
+        </div>
+        <p class="muted small-text" data-i18n="motionHint">Your system reduce-motion setting is always respected.</p>
+      </section>
+
+      <section class="d-sec" aria-labelledby="d-sound">
+        <h3 id="d-sound" data-i18n="soundTitle">Sound</h3>
+        <div class="field toggle-field">
+          <input id="sound-toggle" type="checkbox" class="switch" role="switch">
+          <label for="sound-toggle" data-i18n="soundOn">Gentle sounds</label>
+        </div>
+        <div class="field slider-field">
+          <label for="volume" data-i18n="soundVolume">Volume</label>
+          <input id="volume" type="range" min="0" max="100" step="1" value="40">
+        </div>
+        <p class="muted small-text" data-i18n="soundHint">Sounds are soft and only play after you tap or press a key.</p>
+      </section>
+
+      <button type="button" class="btn ghost" id="drawer-reset" data-i18n="drawerReset">Reset to defaults</button>
+      <p class="status" id="drawer-status" role="status"></p>
+    </div>
+  </aside>
+
+  <!-- BREATHING GUIDE -->
+  <dialog id="breath-dialog" class="breath-dialog" aria-labelledby="breath-title">
+    <h2 id="breath-title" data-i18n="breathTitle">Breathing guide</h2>
+    <p class="muted" id="breath-intro" data-i18n="breathIntro">Breathe in for 4, hold for 4, breathe out for 6.</p>
+    <div class="orb-stage" id="breath-orb" data-orb>
+      <svg class="orb-ring" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+        <circle class="ring-bg" cx="100" cy="100" r="92"/>
+        <circle class="ring-fg" cx="100" cy="100" r="92" pathLength="100"/>
+      </svg>
+      <div class="orb" aria-hidden="true"></div>
+      <div class="orb-text" aria-hidden="true">
+        <span class="orb-phase"></span>
+        <span class="orb-count"></span>
+      </div>
+    </div>
+    <p class="sr-only" id="breath-live" role="status" aria-live="polite"></p>
+    <div class="form-actions center">
+      <button type="button" class="btn primary" id="breath-toggle" data-i18n="breathStart">Start</button>
+      <button type="button" class="btn ghost" id="breath-close" data-i18n="breathClose">Close</button>
+    </div>
+  </dialog>
 
   <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
     <h2 id="confirm-title" data-i18n="confirmTitle">Are you sure?</h2>

@@ -1,6 +1,7 @@
 import { api } from '../api.js';
 import { getLang, t } from '../i18n.js';
-import { el, errorMessage, setStatus, showCrisis } from '../ui.js';
+import { el, errorMessage, pulse, radioGroup, setStatus, showCrisis } from '../ui.js';
+import { play } from '../sound.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const DAYS = 14;
@@ -12,6 +13,7 @@ const PAD_Y = 22;
 let selected = null;
 let statusEl;
 let group;
+let radios;
 let noteEl;
 
 function dayKey(date) {
@@ -107,6 +109,7 @@ function renderChart(days) {
     ),
   );
 
+  document.getElementById('chart-empty').hidden = points.length > 0;
   const withData = points.map((p) => p.avg);
   const summary = document.getElementById('mood-summary');
   if (!withData.length) {
@@ -119,11 +122,12 @@ function renderChart(days) {
 
 function setSelected(score, focus = false) {
   selected = score;
-  for (const btn of group.querySelectorAll('[role="radio"]')) {
-    const on = Number(btn.dataset.score) === score;
-    btn.setAttribute('aria-checked', on ? 'true' : 'false');
-    btn.tabIndex = on || (score === null && btn.dataset.score === '1') ? 0 : -1;
-    if (on && focus) btn.focus();
+  radios.setValue(score === null ? null : String(score), { focus });
+  const sun = document.getElementById('sunrise');
+  if (sun) sun.dataset.score = String(score ?? 0);
+  if (score !== null) {
+    const btn = group.querySelector(`[data-score="${score}"]`);
+    pulse(btn, 'bloom', 900);
   }
 }
 
@@ -142,23 +146,7 @@ export function initMood() {
   group = document.getElementById('mood-group');
   noteEl = document.getElementById('mood-note');
 
-  group.addEventListener('click', (event) => {
-    const btn = event.target.closest('[role="radio"]');
-    if (btn) setSelected(Number(btn.dataset.score));
-  });
-
-  group.addEventListener('keydown', (event) => {
-    const keys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
-    if (!keys.includes(event.key)) return;
-    event.preventDefault();
-    const current = selected ?? 3;
-    let next = current;
-    if (event.key === 'Home') next = 1;
-    else if (event.key === 'End') next = 5;
-    else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = Math.max(1, current - 1);
-    else next = Math.min(5, current + 1);
-    setSelected(next, true);
-  });
+  radios = radioGroup(group, { onSelect: (value) => setSelected(Number(value)) });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -176,6 +164,8 @@ export function initMood() {
         lang: getLang(),
       });
       setStatus(statusEl, t('moodSaved'));
+      play('warm');
+      pulse(form, 'saved', 1400);
       noteEl.value = '';
       setSelected(null);
       if (result.crisis) showCrisis(result.crisis);

@@ -65,3 +65,63 @@ export function confirmDialog(message, confirmLabel) {
     else resolve(window.confirm(message));
   });
 }
+
+/**
+ * Accessible radiogroup with roving tabindex and arrow keys.
+ * Items are `[role="radio"]` descendants carrying data-value.
+ * Arrow keys follow the visual direction (reversed in RTL). Returns { setValue, getValue }.
+ */
+export function radioGroup(container, { onSelect, initial = null } = {}) {
+  const items = () => [...container.querySelectorAll('[role="radio"]')];
+  let value = initial;
+
+  function setValue(next, { focus = false } = {}) {
+    value = next === null || next === undefined ? null : String(next);
+    const list = items();
+    const hit = list.find((b) => b.dataset.value === value);
+    list.forEach((b) => {
+      const on = b === hit;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.tabIndex = on || (!hit && b === list[0]) ? 0 : -1;
+    });
+    if (hit && focus) hit.focus();
+  }
+
+  container.addEventListener('click', (event) => {
+    const btn = event.target.closest('[role="radio"]');
+    if (!btn || !container.contains(btn)) return;
+    setValue(btn.dataset.value);
+    onSelect?.(btn.dataset.value, btn);
+  });
+
+  container.addEventListener('keydown', (event) => {
+    const rtl = document.documentElement.dir === 'rtl';
+    const next = ['ArrowDown', rtl ? 'ArrowLeft' : 'ArrowRight'];
+    const prev = ['ArrowUp', rtl ? 'ArrowRight' : 'ArrowLeft'];
+    const list = items();
+    if (!list.length) return;
+    let index = list.findIndex((b) => b === document.activeElement);
+    if (index < 0) index = Math.max(0, list.findIndex((b) => b.dataset.value === value));
+    let target = null;
+    if (next.includes(event.key)) target = list[(index + 1) % list.length];
+    else if (prev.includes(event.key)) target = list[(index - 1 + list.length) % list.length];
+    else if (event.key === 'Home') target = list[0];
+    else if (event.key === 'End') target = list[list.length - 1];
+    if (!target) return;
+    event.preventDefault();
+    setValue(target.dataset.value, { focus: true });
+    onSelect?.(target.dataset.value, target);
+  });
+
+  setValue(value);
+  return { setValue, getValue: () => value };
+}
+
+/** Plays a CSS animation class once on an element (no-op friendly if animations are off). */
+export function pulse(node, className, ms = 900) {
+  if (!node) return;
+  node.classList.remove(className);
+  void node.offsetWidth;
+  node.classList.add(className);
+  globalThis.setTimeout(() => node.classList.remove(className), ms);
+}
