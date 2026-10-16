@@ -76,7 +76,7 @@ Limits: request bodies are capped at 8 KB, chat messages at 1000 characters, and
 - With the API enabled, **only the chat messages** of the current conversation are sent to Anthropic. Mood history and tasks are never sent.
 - Chat transcripts are kept in the browser's memory only and are not saved on the server.
 - The server does not log message contents, mood notes, or task titles.
-- Preferences (language, theme) are stored in the browser's `localStorage`. Erasing data does not clear these preferences.
+- Only appearance and sound preferences (language, theme, palette, accent, contrast, text size, motion, sound, volume) are stored in the browser's `localStorage`. Chat, mood and task text are never stored there. Erasing data does not clear these preferences. All sounds are generated live with the Web Audio API; there are no audio files.
 - Use HTTPS in any deployment.
 
 ## Crisis resources (owner to localise)

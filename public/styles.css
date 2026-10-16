@@ -160,7 +160,7 @@ p { margin: 0 0 0.75rem; }
 }
 
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-:focus:not(:focus-visible) { outline: none; }
+:focus:not(:focus-visible), [tabindex="-1"]:focus { outline: none; }
 
 .skip-link {
   position: absolute; inset-inline-start: 12px; top: -100px; z-index: 100;
@@ -505,6 +505,7 @@ input.switch:checked::after { transform: translateX(-20px); background: var(--ac
 }
 .chip-radio[aria-checked="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .slider-field { margin-top: 0.75rem; }
+#sleep-grid { margin-bottom: 1rem; }
 input[type="range"] { width: 100%; accent-color: var(--accent); min-height: 32px; }
 .player { text-align: center; }
 .med-step { min-height: 3.6em; font-size: 1.1rem; margin: 0.5rem auto; max-width: 34rem; transition: opacity 0.4s ease; }
@@ -590,7 +591,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); min-height: 32px
 .p-a { fill: var(--a); } .p-b { fill: var(--b); } .p-c { fill: var(--c); } .p-d { fill: var(--d); }
 .p-star { fill: #fff; } .p-bub { fill: #fff; opacity: 0.7; } .p-leaf { fill: var(--leaf, #3f8f5f); }
 .p-bird { stroke: #7a4a1c; stroke-width: 1.5; stroke-linecap: round; }
-.a-wave { animation: wave 6s linear infinite; }
+.a-wave { animation: wave-s 3s linear infinite; }
 .a-wave.slow { animation-duration: 9s; animation-direction: reverse; }
 .a-pulse { animation: breathe 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .a-twinkle { animation: twinkle 2.6s ease-in-out infinite; }
@@ -636,6 +637,7 @@ html[data-vt="reveal"]::view-transition-new(root) { z-index: 2; animation: vt-re
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1.2deg); } }
 @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 @keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+@keyframes wave-s { from { transform: translateX(0); } to { transform: translateX(-24px); } }
 @keyframes wave { from { transform: translateX(0); } to { transform: translateX(-200px); } }
 @keyframes spout { 0%, 100% { opacity: 0.2; transform: scaleY(0.6); } 50% { opacity: 0.9; transform: scaleY(1); } }
 @keyframes drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(24px); } }
