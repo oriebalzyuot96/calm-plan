@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calm Plan | خطة الهدوء</title>
+  <meta name="description" content="A bilingual self-help companion. Not therapy, not a diagnosis, and not a replacement for a doctor or crisis service.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+
+  <header class="app-header">
+    <div class="brand">
+      <h1 data-i18n="appName">Calm Plan</h1>
+      <p class="tagline" data-i18n="tagline">A calm companion for your day</p>
+    </div>
+    <nav aria-label="Main">
+      <ul class="tabs">
+        <li><a href="#today" data-route="today" data-i18n="navToday">Today</a></li>
+        <li><a href="#mood" data-route="mood" data-i18n="navMood">Mood</a></li>
+        <li><a href="#chat" data-route="chat" data-i18n="navChat">Chat</a></li>
+        <li><a href="#settings" data-route="settings" data-i18n="navSettings">Settings</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside class="notice" aria-label="Important information">
+    <p lang="en" dir="ltr"><strong>Please note:</strong> Calm Plan is a self-help tool. It is <strong>not therapy</strong>, it does not diagnose anything, and it is <strong>not a replacement for a doctor or a crisis service</strong>. If you may harm yourself, call your local emergency number now.</p>
+    <p lang="ar" dir="rtl"><strong>تنبيه:</strong> خطة الهدوء أداة لدعم الذات. وهي <strong>ليست علاجًا نفسيًا</strong>، ولا تشخص أي حالة، و<strong>ليست بديلًا عن الطبيب أو خدمات الطوارئ والأزمات</strong>. إذا كنت تفكر في إيذاء نفسك، فاتصل الآن برقم الطوارئ في بلدك.</p>
+  </aside>
+
+  <section id="crisis" class="crisis" role="alert" aria-labelledby="crisis-title" tabindex="-1" hidden>
+    <h2 id="crisis-title" data-crisis-title></h2>
+    <p data-crisis-body></p>
+    <ol data-crisis-steps></ol>
+    <p data-crisis-prompt></p>
+    <button type="button" class="btn ghost" data-crisis-dismiss data-i18n="crisisDismiss">Hide this message</button>
+  </section>
+
+  <main id="main" tabindex="-1">
+    <!-- TODAY -->
+    <section class="view" data-view="today" aria-labelledby="h-today" hidden>
+      <h2 id="h-today" tabindex="-1" data-i18n="todayTitle">Today</h2>
+      <form id="task-form" class="card form-row" novalidate>
+        <div class="field grow">
+          <label for="task-title" data-i18n="taskLabel">New task or habit</label>
+          <input id="task-title" name="title" type="text" maxlength="200" autocomplete="off" required data-i18n-attr="placeholder:taskPlaceholder">
+        </div>
+        <div class="field">
+          <label for="task-due" data-i18n="dueLabel">Due date (optional)</label>
+          <input id="task-due" name="dueDate" type="date">
+        </div>
+        <div class="field toggle-field">
+          <input id="task-habit" type="checkbox" class="switch" role="switch">
+          <label for="task-habit" data-i18n="habitToggle">Habit</label>
+        </div>
+        <button type="submit" class="btn primary" data-i18n="addButton">Add</button>
+        <p class="status" id="task-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <h3 class="section-title" data-i18n="listTitle">Your list</h3>
+      <p class="muted" id="task-empty" hidden data-i18n="emptyTasks">Nothing here yet. Add one small task or one wellbeing habit.</p>
+      <ol class="task-list" id="task-list" aria-label="Tasks and habits"></ol>
+    </section>
+
+    <!-- MOOD -->
+    <section class="view" data-view="mood" aria-labelledby="h-mood" hidden>
+      <h2 id="h-mood" tabindex="-1" data-i18n="moodTitle">Mood check-in</h2>
+      <form id="mood-form" class="card" novalidate>
+        <fieldset class="mood-fieldset">
+          <legend data-i18n="moodQuestion">How are you feeling right now?</legend>
+          <div class="mood-group" role="radiogroup" id="mood-group" data-i18n-attr="aria-label:moodQuestion">
+            <button type="button" role="radio" aria-checked="false" data-score="1" class="mood-btn" tabindex="-1"><span class="mood-num">1</span><span data-i18n="mood1">Very low</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="2" class="mood-btn" tabindex="-1"><span class="mood-num">2</span><span data-i18n="mood2">Low</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="3" class="mood-btn" tabindex="-1"><span class="mood-num">3</span><span data-i18n="mood3">Okay</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="4" class="mood-btn" tabindex="-1"><span class="mood-num">4</span><span data-i18n="mood4">Good</span></button>
+            <button type="button" role="radio" aria-checked="false" data-score="5" class="mood-btn" tabindex="-1"><span class="mood-num">5</span><span data-i18n="mood5">Great</span></button>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="mood-note" data-i18n="moodNoteLabel">A short note (optional)</label>
+          <textarea id="mood-note" name="note" rows="3" maxlength="500"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn primary" data-i18n="saveMood">Save check-in</button>
+          <p class="status" id="mood-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <h3 class="section-title" data-i18n="chartTitle">The last 14 days</h3>
+      <div class="card">
+        <div id="mood-chart" class="chart-wrap" dir="ltr"></div>
+        <p class="muted" id="mood-summary"></p>
+        <table class="sr-only" id="mood-table">
+          <caption data-i18n="chartTableCaption">Mood by day</caption>
+          <thead><tr><th scope="col" data-i18n="dayHeader">Day</th><th scope="col" data-i18n="scoreHeader">Average score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CHAT -->
+    <section class="view" data-view="chat" aria-labelledby="h-chat" hidden>
+      <h2 id="h-chat" tabindex="-1" data-i18n="chatTitle">Chat</h2>
+      <p class="muted" data-i18n="chatIntro">This is a supportive chat, not therapy. I can help you reflect, plan, or pause. I cannot give medical advice.</p>
+      <div class="card chat-card">
+        <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation" tabindex="0"></div>
+        <div class="chips" role="group" aria-label="Suggestions" id="chat-chips"></div>
+        <form id="chat-form" class="chat-form" novalidate>
+          <div class="field grow">
+            <label for="chat-input" data-i18n="chatLabel">Your message</label>
+            <textarea id="chat-input" rows="2" maxlength="1000"></textarea>
+          </div>
+          <button type="submit" class="btn primary" data-i18n="sendButton">Send</button>
+        </form>
+        <p class="status" id="chat-status" role="status"></p>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" data-view="settings" aria-labelledby="h-settings" hidden>
+      <h2 id="h-settings" tabindex="-1" data-i18n="settingsTitle">Settings</h2>
+
+      <div class="card">
+        <h3 class="section-title" data-i18n="languageTitle">Language</h3>
+        <div class="field">
+          <label for="lang-select" data-i18n="languageLabel">Language</label>
+          <select id="lang-select">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title" data-i18n="themeTitle">Appearance</h3>
+        <div class="field">
+          <label for="theme-select" data-i18n="themeLabel">Theme</label>
+          <select id="theme-select">
+            <option value="system" data-i18n="themeSystem">System</option>
+            <option value="light" data-i18n="themeLight">Light</option>
+            <option value="dark" data-i18n="themeDark">Dark</option>
+          </select>
+        </div>
+        <div class="field toggle-field">
+          <input id="motion-toggle" type="checkbox" class="switch" role="switch">
+          <label for="motion-toggle" data-i18n="reduceMotion">Reduce motion</label>
+        </div>
+        <p class="muted" data-i18n="motionHint">Your system's reduce-motion setting is always respected.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title" data-i18n="privacyTitle">Your data</h3>
+        <p data-i18n="privacyText">Your tasks and mood check-ins are stored on this server, in a local database. Chat messages are not saved. The owner decides where the server runs.</p>
+        <button type="button" class="btn danger" id="erase-btn" data-i18n="eraseButton">Erase all my data</button>
+        <p class="status" id="settings-status" role="status"></p>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title" data-i18n="aboutTitle">About</h3>
+        <p data-i18n="aboutText">Calm Plan is a self-help tool. It is not therapy, not a diagnosis, and not a replacement for a doctor or a crisis service.</p>
+        <p data-i18n="crisisNote">If you may harm yourself, contact your local emergency number or a trusted person now.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p data-i18n="footerText">Calm Plan is a self-help tool, not therapy and not a diagnosis.</p>
+  </footer>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+    <h2 id="confirm-title" data-i18n="confirmTitle">Are you sure?</h2>
+    <p id="confirm-text"></p>
+    <form method="dialog" class="form-actions">
+      <button value="cancel" class="btn ghost" data-i18n="cancel">Cancel</button>
+      <button value="ok" class="btn danger" id="confirm-ok" data-i18n="confirmErase">Erase</button>
+    </form>
+  </dialog>
+</body>
+</html>

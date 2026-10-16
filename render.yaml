@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: calm-plan
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: node server/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: DATA_FILE
+        value: /var/data/calm-plan.db
+      - key: CHAT_MODEL
+        value: claude-haiku-5-5
+      - key: TRUST_PROXY
+        value: "1"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+    disk:
+      name: calm-plan-data
+      mountPath: /var/data
+      sizeGB: 1

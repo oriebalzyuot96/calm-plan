@@ -1,0 +1,16 @@
+{
+  "name": "calm-plan",
+  "version": "0.1.0",
+  "description": "A bilingual (Arabic/English) self-help companion: daily to-do list with habits, mood check-ins, and a supportive chat. Not therapy.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Orieb Alzyuot",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test test/*.test.js"
+  }
+}
