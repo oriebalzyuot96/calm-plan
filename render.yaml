@@ -3,7 +3,7 @@ services:
     name: calm-plan
     runtime: node
     plan: starter
-    buildCommand: npm ci
+    buildCommand: npm ci && npm run build
     startCommand: node server/index.js
     healthCheckPath: /health
     envVars:

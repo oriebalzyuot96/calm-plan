@@ -17,6 +17,7 @@ const ROOT = path.resolve(WEB, '..');
 function calmPlanHtml(demo: boolean): Plugin {
   return {
     name: 'calm-plan-html',
+    apply: 'build',
     transformIndexHtml: {
       order: 'post',
       handler(html) {
