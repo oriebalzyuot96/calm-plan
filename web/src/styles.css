@@ -915,3 +915,13 @@ p {
 .cp-add-card.pl-card {
   overflow: visible;
 }
+
+/* The bilingual demo banner: one line per language, each aligned to its own direction. */
+.cp-demo .pl-message__text {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.cp-demo .pl-message__text > span {
+  text-align: start;
+}

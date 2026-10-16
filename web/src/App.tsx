@@ -78,7 +78,7 @@ function Header({ demo }: { demo: boolean }) {
             variant="ghost"
             size="sm"
             onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-            aria-label={t('toggleLanguageLabel')}
+            title={t('toggleLanguageLabel')}
           >
             <LanguageIcon size={18} />
             <span lang={lang === 'ar' ? 'en' : 'ar'}>{t('toggleLanguage')}</span>

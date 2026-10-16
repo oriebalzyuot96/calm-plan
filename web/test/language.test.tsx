@@ -17,7 +17,7 @@ describe('language', () => {
     expect(html.lang).toBe('ar');
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('خطة الهدوء');
 
-    await user.click(screen.getByRole('button', { name: 'التبديل إلى الإنجليزية' }));
+    await user.click(screen.getByRole('button', { name: 'English' }));
     await waitFor(() => expect(html.dir).toBe('ltr'));
     expect(html.lang).toBe('en');
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Calm Plan');
